@@ -45,6 +45,14 @@ export default {
 
 
 <style>
+.carousel-view {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 100;
+}
 .carousel-controls__button{
   background: url('./assets/arrow.png');
   background-repeat: no-repeat;
@@ -55,12 +63,6 @@ export default {
 }
 .carousel-controls__button.next{
   transform: scaleX(-1);
-}
-.carousel-view {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
 }
 .carousel {
   display: flex;

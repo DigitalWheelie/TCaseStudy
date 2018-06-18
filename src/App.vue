@@ -3,7 +3,7 @@
     <div id="app">
       <div class="prodMain">
       <h1 id="prodTitle">{{ csTitle }}</h1>
-      <div id="primaryImage">
+      <div id="primaryImage" class="blender">
          <img v-bind:src="csPImage" width="400px" height="400px">
        </div>
 
@@ -157,6 +157,8 @@
     padding: 0 10%;
     margin: 0 0 .5em;
     line-height: 1.2;
+    position: relative;
+    z-index: 100;
   }
   h2{
     font-size: 2.25em;
@@ -181,6 +183,7 @@
   }
   .prodMain{
     width: 480px;
+    perspective: 1200px;
   }
   .prodDetails{
   }
@@ -245,6 +248,25 @@
   .soloButton{
     width: 100%;
   }
+
+  .blender {
+    animation-name: spinAnimIn;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-out;
+    animation-duration: 4s;
+    animation-fill-mode: forwards;
+    transform-style: preserve-3d;
+    z-index: 1;
+    opacity: 0;
+
+  }
+
+  @keyframes spinAnimIn {
+    from { transform: rotateY(360deg);}
+    to   { transform: rotateY(0deg);  opacity: 1;}
+  }
+
+
 
 
 @media only screen and (min-width: 1024px) {
