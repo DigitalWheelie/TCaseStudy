@@ -7,7 +7,7 @@
       tag="div">
       <div v-for="(item, index) in slides"
       class='slide'
-      :key="index">
+      :key="(item.image).split(/[/]+/).pop()">
         <img v-bind:src="item.image" width="50px" height="50px">
       </div>
 
@@ -24,28 +24,6 @@ export default {
   data () {
     return {
       slides: null
-      // slides: [
-      //   {
-      //     title: 'I am Slide A',
-      //     id: 1
-      //   },
-      //   {
-      //     title: 'I am Slide B',
-      //     id: 2
-      //   },
-      //   {
-      //     title: 'I am Slide C',
-      //     id: 3
-      //   },
-      //   {
-      //     title: 'I am Slide D',
-      //     id: 4
-      //   },
-      //   {
-      //     title: 'I am Slide E',
-      //     id: 5
-      //   }
-      // ]
     }
   },
   created (){
@@ -54,12 +32,12 @@ export default {
   },
   methods: {
     next () {
-      const first = this.slides.shift()
-      this.slides = this.slides.concat(first)
-    },
-    previous () {
       const last = this.slides.pop()
       this.slides = [last].concat(this.slides)
+    },
+    previous () {
+      const first = this.slides.shift()
+      this.slides = this.slides.concat(first)
     }
   }
 }

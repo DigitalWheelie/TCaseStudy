@@ -2,7 +2,7 @@
   <div class="appWrapper">
     <div id="app">
       <div class="prodMain">
-      <h1>{{ csTitle }}</h1>
+      <h1 id="prodTitle">{{ csTitle }}</h1>
       <div id="primaryImage">
          <img v-bind:src="csPImage" width="400px" height="400px">
        </div>
@@ -18,12 +18,29 @@
       </div>
 
       <div id="purchase" class="purchaseWrapper">
-        <span v-if="availOnline"><img src="./assets/btnOnline.png"></span>
-        <span v-if="availInstore"><img src="./assets/btnPickUp.png"></span>
+        <div v-if="bothAvail" class="shopButton storeButton">Pick Up in Store</div>
+        <div v-if="availInstore" class="shopButton storeButton soloButton">Pick Up in Store</div>
+        <div v-if="bothAvail" class="shopButton cartButton">Add to Cart</div>
+        <div v-if="availInstore" class="shopButton cartButton soloButton">Add to Cart</div>
       </div>
 
       <div>
         <img src="./assets/mock2b.png">
+        <div class="prodHilites">
+          <h2>Product Highlights</h2>
+          <ul>
+            <li>Wattage Output: 1100 Watts</li>
+            <li>Number of Speeds: 3</li>
+            <li>Capacity (volume): 72.0 Oz.</li>
+            <li>Appliance Capabilities: Blends</li>
+            <li>Includes: Travel Lid</li>
+            <li>Material: Plastic</li>
+            <li>Finish: Painted</li>
+            <li>Metal Finish: Chrome</li>
+            <li>Safety and Security Features: Non-Slip Base</li>
+            <li>Care and Cleaning: Easy-To-Clean, Dishwasher Safe Parts</li>
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -68,11 +85,14 @@
           this.csPurchaseCode = locJSON.CatalogEntryView[0].purchasingChannelCode
     },
     computed : {
+      bothAvail(){
+        return (this.csPurchaseCode == 0);
+      },
       availOnline(){
-        return (this.csPurchaseCode == 0 || this.csPurchaseCode == 1)
+        return (this.csPurchaseCode == 1);
       },
       availInstore(){
-        return (this.csPurchaseCode == 0 || this.csPurchaseCode == 2)
+        return (this.csPurchaseCode == 2);
       }
     }
   }
@@ -138,25 +158,21 @@
     margin: 0 0 .5em;
     line-height: 1.2;
   }
+  h2{
+    font-size: 2.25em;
+    text-transform: lowercase;
+    line-height: 3.125em
+  }
 
   #app {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    padding-top: 10em;
 
     text-align: center;
     color: #000;
 
     flex-direction: column;
     flex-wrap: wrap;
-  }
-
-  ul {
-    padding: 0;
-  }
-
-  li {
-    display: inline-block;
-    margin: 0 10px;
-    border: 1px solid black;
   }
 
   .appWrapper{
@@ -184,6 +200,50 @@
   .priceQualifier{
     font-size: .7em;
     color: #666666;
+  }
+
+  .prodHilites{
+    font-family: Helvetica;
+    text-align: left;
+    padding-left: 1.5em;
+    line-height: 1.5em;
+  }
+
+  .prodHilites ul{
+    color: #666;
+    font-size: .875em;
+    list-style-position: inside;
+    list-style-type: disc;
+  }
+
+
+  /*Buttons*/
+  .shopButton {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.5);
+    width: 13.63em;
+    color: #fff;
+    font-weight: 100;
+    font-size: 1.1em;
+    line-height: 2.27em;
+    letter-spacing: .08em;
+    display: inline-block;
+    text-transform: uppercase;
+  }
+  .cartButton {
+    border-color: rgb(204, 0, 0);
+    background-color: rgb(204, 0, 0);
+    background: linear-gradient(#e16767, #cd0404, #cc0000);
+  }
+  .storeButton {
+    border-color: rgb(0, 0, 0);
+    background-color: rgb(204, 0, 0);
+    background: linear-gradient(#6a6a6a, #030303, #000);
+  }
+  .soloButton{
+    width: 100%;
   }
 
 
